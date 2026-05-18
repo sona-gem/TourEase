@@ -14,6 +14,7 @@ import {
   DollarSign,
   Award,
   Star,
+  Sparkles,
 } from "lucide-react";
 import CountUp from "../components/CountUp";
 import ChatbotLauncher from "../components/chatbot/ChatbotLauncher";
@@ -110,7 +111,7 @@ export default function Home() {
 
                     <div className="absolute bottom-6 left-6 bg-white/70 dark:bg-white/10 backdrop-blur-xl px-4 py-2 rounded-2xl border border-white/40 dark:border-white/20 shadow-xl">
                       <div className="flex items-center gap-2">
-                        <span className="text-teal-500">✦</span>
+                        <Sparkles className="text-teal-500 w-3 h-3" />
                         <p className="text-gray-900 dark:text-white text-[10px] font-bold uppercase tracking-wider">
                           Top Rated Experience
                         </p>
