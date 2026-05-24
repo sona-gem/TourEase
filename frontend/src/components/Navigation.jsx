@@ -100,12 +100,12 @@ export default function Navigation() {
       `}</style>
 
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-950 bg-gradient-to-b from-teal-50/50 to-transparent dark:from-gray-800/50 shadow-md border-b border-gray-200 dark:border-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between">
+        <div className="w-full px-4 sm:px-8 lg:px-12">
+          <div className="flex h-20 items-center justify-between">
             {/* LOGO */}
             <div
               onClick={handleLogoClick}
-              className="cursor-pointer flex items-center gap-2 group"
+              className="cursor-pointer flex items-center gap-2 group shrink-0"
             >
               <div className="relative flex items-center justify-center w-8 h-8">
                 <Globe className="w-8 h-8 text-teal-600 dark:text-cyan-400 group-hover:rotate-180 transition-transform duration-700" strokeWidth={1.5} />
@@ -117,27 +117,39 @@ export default function Navigation() {
             </div>
 
             {/* DESKTOP NAV */}
-            <div className="hidden md:flex items-center gap-1">
-              {navItems.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={`px-4 py-2 rounded-lg font-semibold transition-all ${isActive(item.path)
-                    ? "bg-teal-500 dark:bg-indigo-600 text-white"
-                    : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-                    }`}
-                >
-                  {item.label}
-                </Link>
-              ))}
+            <div className="hidden md:flex items-center gap-2 flex-1 justify-center px-8">
+              {navItems.map((item, index) => {
+                const hoverColors = [
+                  "hover:bg-cyan-100 dark:hover:bg-cyan-900/30",
+                  "hover:bg-blue-100 dark:hover:bg-blue-900/30",
+                  "hover:bg-purple-100 dark:hover:bg-purple-900/30",
+                  "hover:bg-pink-100 dark:hover:bg-pink-900/30",
+                  "hover:bg-orange-100 dark:hover:bg-orange-900/30",
+                  "hover:bg-indigo-100 dark:hover:bg-indigo-900/30",
+                  "hover:bg-violet-100 dark:hover:bg-violet-900/30",
+                  "hover:bg-amber-100 dark:hover:bg-amber-900/30"
+                ];
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className={`px-3 py-2 rounded-lg font-semibold whitespace-nowrap text-base transition-all ${isActive(item.path)
+                      ? "bg-teal-500 dark:bg-indigo-600 text-white"
+                      : `text-gray-700 dark:text-gray-300 ${hoverColors[index]}`
+                      }`}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
               <Link
                 to="/favorites"
-                className={`relative px-4 pr-12 py-2 rounded-lg font-semibold flex items-center gap-2 transition ${isActive("/favorites")
+                className={`group relative px-3 py-2 rounded-lg font-semibold flex items-center gap-2 whitespace-nowrap text-base transition ${isActive("/favorites")
                   ? "bg-teal-500 dark:bg-indigo-600 text-white"
-                  : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                  : "text-gray-700 dark:text-gray-300 hover:bg-red-100 dark:hover:bg-red-900/30"
                   }`}
               >
-                <Heart className="w-5 h-5" />
+                <Heart className="w-5 h-5 transition-colors group-hover:text-red-500 group-hover:fill-red-500" />
                 Favorites
                 {favoriteIds.length > 0 && (
                   <span className="absolute right-3 top-1/2 -translate-y-1/2 bg-red-500 text-white text-xs px-2 h-5 min-w-7 rounded-full inline-flex items-center justify-center">
@@ -148,17 +160,16 @@ export default function Navigation() {
             </div>
 
             {/* RIGHT ACTIONS */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4 shrink-0">
 
               {/* THEME TOGGLE */}
               <button
                 onClick={toggleTheme}
                 className="
                   p-2 rounded-lg cursor-pointer
-                  hover:bg-gray-100 dark:hover:bg-gray-800
+                  hover:bg-yellow-100 dark:hover:bg-yellow-900/30
                   transition-all duration-300 ease-in-out
-                  active:scale-95
-                "
+                  active:scale-95"
                 title="Toggle theme"
               >
                 {theme === "dark" ? (
@@ -172,14 +183,14 @@ export default function Navigation() {
               {!isLoggedIn ? (
                 <Link
                   to="/login"
-                  className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg font-semibold transition items-center"
+                  className="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2 rounded-lg font-semibold transition whitespace-nowrap text-base shadow-lg hover:shadow-xl"
                 >
                   Get Started
                 </Link>
               ) : (
                 <button
                   onClick={handleLogout}
-                  className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg font-semibold transition"
+                  className="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-lg font-semibold transition whitespace-nowrap text-base shadow-lg hover:shadow-xl"
                 >
                   Logout
                 </button>
@@ -222,12 +233,12 @@ export default function Navigation() {
         <div className="h-full flex flex-col p-6 space-y-4">
           {/* Header with close button */}
           <div className="flex items-center justify-between py-2">
-            <span className="text-xl font-bold text-gray-900 dark:text-white">
+            <span className="text-2xl font-bold text-gray-900 dark:text-white">
               Menu
             </span>
             <button
               onClick={() => setIsOpen(false)}
-              className="p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200 text-gray-900 dark:text-white"
+              className="p-2 rounded-xl hover:bg-red-100 dark:hover:bg-red-900/40 transition-all duration-200 text-gray-900 dark:text-white"
             >
               <X className="w-6 h-6" />
             </button>
@@ -235,32 +246,44 @@ export default function Navigation() {
 
           {/* Scrollable content */}
           <div className="flex-1 overflow-y-auto space-y-3">
-            {navItems.map((item, index) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                onClick={() => setIsOpen(false)}
-                className={`block px-5 py-4 rounded-2xl font-semibold transition-all duration-200 ${isActive(item.path)
-                  ? "bg-linear-to-r from-teal-500 to-cyan-600 dark:from-indigo-500 dark:to-purple-600 text-white shadow-lg"
-                  : "text-gray-700 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700/50"
-                  }`}
-                style={{
-                  animation: isOpen
-                    ? `slideInRight 0.5s cubic-bezier(0.4, 0, 0.2, 1) ${0.05 * (index + 1)}s backwards`
-                    : "none"
-                }}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {navItems.map((item, index) => {
+              const mobileHoverColors = [
+                "hover:bg-cyan-100 dark:hover:bg-cyan-900/40",
+                "hover:bg-blue-100 dark:hover:bg-blue-900/40",
+                "hover:bg-purple-100 dark:hover:bg-purple-900/40",
+                "hover:bg-pink-100 dark:hover:bg-pink-900/40",
+                "hover:bg-orange-100 dark:hover:bg-orange-900/40",
+                "hover:bg-indigo-100 dark:hover:bg-indigo-900/40",
+                "hover:bg-violet-100 dark:hover:bg-violet-900/40",
+                "hover:bg-amber-100 dark:hover:bg-amber-900/40"
+              ];
+              return (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  onClick={() => setIsOpen(false)}
+                  className={`block px-5 py-4 rounded-2xl font-semibold text-base transition-all duration-200 ${isActive(item.path)
+                    ? "bg-linear-to-r from-teal-500 to-cyan-600 dark:from-indigo-500 dark:to-purple-600 text-white shadow-lg"
+                    : `text-gray-700 dark:text-gray-100 ${mobileHoverColors[index]}`
+                    }`}
+                  style={{
+                    animation: isOpen
+                      ? `slideInRight 0.5s cubic-bezier(0.4, 0, 0.2, 1) ${0.05 * (index + 1)}s backwards`
+                      : "none"
+                  }}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
 
             {/* Favorites */}
             <Link
               to="/favorites"
               onClick={() => setIsOpen(false)}
-              className={`relative px-5 py-4 rounded-2xl font-semibold flex items-center gap-3 transition-all duration-200 ${isActive("/favorites")
+              className={`group relative px-5 py-4 rounded-2xl font-semibold flex items-center gap-3 text-base transition-all duration-200 ${isActive("/favorites")
                 ? "bg-linear-to-r from-teal-500 to-cyan-600 dark:from-indigo-500 dark:to-purple-600 text-white shadow-lg"
-                : "text-gray-700 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700/50"
+                : "text-gray-700 dark:text-gray-100 hover:bg-red-100 dark:hover:bg-red-900/40"
                 }`}
               style={{
                 animation: isOpen
@@ -268,7 +291,7 @@ export default function Navigation() {
                   : "none"
               }}
             >
-              <Heart className="w-5 h-5 shrink-0" />
+              <Heart className="w-5 h-5 shrink-0 transition-colors group-hover:text-red-500 group-hover:fill-red-500" />
               <span>Favorites</span>
               {favoriteIds.length > 0 && (
                 <span className="ml-auto bg-red-500 text-white text-xs px-2.5 py-1 rounded-full font-bold min-w-8 flex items-center justify-center shadow-lg">
@@ -290,7 +313,7 @@ export default function Navigation() {
             {!isLoggedIn ? (
               <Link
                 to="/login"
-                className="block w-full bg-linear-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-6 py-4 rounded-2xl font-bold text-lg transition-all duration-300 shadow-lg text-center"
+                className="block w-full bg-linear-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-6 py-4 rounded-2xl font-bold text-xl transition-all duration-300 shadow-lg text-center"
                 onClick={() => setIsOpen(false)}
               >
                 Get Started
@@ -301,7 +324,7 @@ export default function Navigation() {
                   setIsOpen(false);
                   handleLogout();
                 }}
-                className="block w-full bg-linear-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-6 py-4 rounded-2xl font-bold text-lg transition-all duration-300 shadow-lg text-center"
+                className="block w-full bg-linear-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-6 py-4 rounded-2xl font-bold text-xl transition-all duration-300 shadow-lg text-center"
               >
                 Logout
               </button>
