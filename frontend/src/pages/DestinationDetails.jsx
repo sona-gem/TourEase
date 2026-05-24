@@ -132,7 +132,7 @@ export default function DestinationDetails() {
           {/* <--- END OF LEFT SECTION */}
           {/* Right Section */}
           <div className="lg:col-span-4">
-            <div className="sticky top-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6">
+            <div className="sticky top-20 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6">
               <p className="text-xl font-bold mb-4">Quick actions</p>
 
               <button
